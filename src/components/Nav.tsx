@@ -11,7 +11,13 @@ export const Nav = () => {
       <Link to="/unsecured">Unsecured</Link>
       <Link to="/secured">Secured</Link>
       {!auth.isAuthenticated && <button onClick={() => auth.signinRedirect()}>Login</button>}
-      {auth.isAuthenticated && <button onClick={() => auth.signoutRedirect()}>Logout {auth.user?.profile.name}</button>}
+      {auth.isAuthenticated && (
+        <button
+          onClick={() => auth.signoutRedirect({ post_logout_redirect_uri: 'http://localhost:3100/profil/odhlaseni/' })}
+        >
+          Logout {auth.user?.profile.name}
+        </button>
+      )}
     </nav>
   )
 }
