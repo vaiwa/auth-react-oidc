@@ -12,7 +12,7 @@ function App() {
     import.meta.env.VITE_OIDC_USE_KEYCLOAK === 'true'
       ? {}
       : {
-          scopes: ['basic', 'profile', 'openid'],
+          scope: 'basic profile openid',
           extraQueryParams: { resource: 'urn:ct:graphql-internal' },
           extraTokenParams: { resource: 'urn:ct:graphql-internal' },
           client_secret: import.meta.env.VITE_OIDC_CLIENT_SECRET,
