@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 export const Nav = () => {
   const auth = useAuth()
+  console.info('USER', auth.user)
+
   return (
     <nav className="nav">
       <Link to="/">Home</Link>

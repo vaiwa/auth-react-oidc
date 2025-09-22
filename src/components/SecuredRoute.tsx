@@ -1,7 +1,9 @@
 import { useAuth } from 'react-oidc-context'
+import { useToken } from '../hooks/useToken'
 
 export const SecuredRoute = () => {
   const auth = useAuth()
+  const { accessToken, idToken, isExpired, isValid } = useToken()
 
   return (
     <div>
@@ -23,6 +25,28 @@ export const SecuredRoute = () => {
             <summary>Full User Profile</summary>
             <pre>{JSON.stringify(auth.user.profile, null, 2)}</pre>
           </details>
+
+          <hr />
+
+          {accessToken && (
+            <>
+              <details>
+                <summary>Full Access Token</summary>
+                <pre>{JSON.stringify(accessToken, null, 2)}</pre>
+                <span>Token: {isValid ? '✅ Valid' : '❌ Invalid'}</span>
+                {isExpired && <span style={{ color: 'red', marginLeft: '10px' }}>⚠️ EXPIRED</span>}
+              </details>
+            </>
+          )}
+
+          <hr />
+
+          {idToken && (
+            <details>
+              <summary>Full ID Token</summary>
+              <pre>{JSON.stringify(idToken, null, 2)}</pre>
+            </details>
+          )}
         </div>
       )}
     </div>
